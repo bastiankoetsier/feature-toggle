@@ -2,10 +2,10 @@
 
 use Bkoetsier\FeatureToggle\Features\Id;
 
-interface FeatureToggler {
+interface FeatureToggler
+{
 
     public function disable(Id $id);
 
     public function enable(Id $id);
-
 }

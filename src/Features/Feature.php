@@ -2,7 +2,8 @@
 
 use Bkoetsier\FeatureToggle\FeatureCollection;
 
-class Feature {
+class Feature
+{
 
     /**
      * @var \Bkoetsier\FeatureToggle\Features\Id
@@ -17,7 +18,7 @@ class Feature {
      */
     private $state;
 
-    function __construct(Id $id, FeatureCollection $keys, State $state)
+    public function __construct(Id $id, FeatureCollection $keys, State $state)
     {
         $this->id = $id;
         $this->keys = $keys;
@@ -44,5 +45,4 @@ class Feature {
     {
         return $this->state === State::ON;
     }
-
 }

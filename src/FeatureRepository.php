@@ -1,7 +1,6 @@
 <?php namespace Bkoetsier\FeatureToggle;
 
-interface FeatureRepository {
-
+interface FeatureRepository
+{
     public function all();
-
 }
