@@ -1,0 +1,50 @@
+---
+# example features
+features:
+  - id: Feature 5
+    keys:
+      - old: newKey
+        new: newKey2
+      - old: old2
+        new: old3
+    state: true
+  - id: Feature 1
+    keys:
+      - old: newKey
+        new: newKey2
+    state: true
+
+
+
+
+
+
+
+#user1:
+#  name: Example Developer
+#  job: Developer
+#  skill: Elite
+#  employed: True
+#  foods:
+#      - Apple: fruit
+#      - Orange: fruit
+#      - Strawberry: fruit
+#      - Mango: fruit
+#  languages:
+#      ruby: Elite
+#      python: Elite
+#      dotnet: Lame
+#user2:
+#  name: Example Developer
+#  job: Developer
+#  skill: Elite
+#  employed: True
+#  foods:
+#      - Apple
+#      - Orange
+#      - Strawberry
+#      - Mango
+#  languages:
+#      ruby: Elite
+#      python: Elite
+#      dotnet: Lame

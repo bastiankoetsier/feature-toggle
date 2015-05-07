@@ -36,7 +36,14 @@ class Collection implements FeatureCollection
 
     public function remove(Id $id)
     {
-
+        /**
+         * @var Feature $f
+         */
+        foreach ($this->features as $index => $f) {
+            if ($f->getId() == $id->get()) {
+                unset($this->features[$index]);
+            }
+        }
     }
 
     public function all()
