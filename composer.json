@@ -1,0 +1,25 @@
+{
+    "name": "bkoetsier/feature-toggle",
+    "authors": [
+        {
+            "name": "Bastian Koetsier",
+            "email": "bastian.koetsier@googlemail.com"
+        }
+    ],
+    "autoload":{
+      "psr-4":{
+        "Bkoetsier\\FeatureToggle\\":"src"
+      }
+    },
+    "autoload-dev":{
+      "psr-4":{
+        "Bkoetsier\\FeatureToggle\\Tests\\":"tests"
+      }
+    },
+
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "~4.6",
+        "squizlabs/php_codesniffer": "~2.3"
+    }
+}
