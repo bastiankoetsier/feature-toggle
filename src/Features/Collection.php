@@ -1,8 +1,10 @@
 <?php namespace Bkoetsier\FeatureToggle\Features;
 
 use Bkoetsier\FeatureToggle\Exceptions\FeatureIdExistsException;
+use Bkoetsier\FeatureToggle\FeatureCollection;
 
-class Collection {
+class Collection implements FeatureCollection
+{
 
     private $features = [];
 
@@ -24,12 +26,21 @@ class Collection {
     protected function guard(Feature $feature)
     {
         /** @var Feature $f */
-        foreach($this->features as $f){
-            if($f->getId() == $feature->getId()){
+        foreach ($this->features as $f) {
+            if ($f->getId() == $feature->getId()) {
                 throw new FeatureIdExistsException("Feature-ID already exists in collection");
             }
         }
         return true;
     }
 
+    public function remove(Id $id)
+    {
+
+    }
+
+    public function all()
+    {
+        return $this->features;
+    }
 }

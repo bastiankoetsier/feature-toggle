@@ -3,7 +3,8 @@
 use Bkoetsier\FeatureToggle\Features\Feature;
 use Bkoetsier\FeatureToggle\Features\Id;
 
-interface FeatureCollection {
+interface FeatureCollection
+{
 
     public function add(Feature $feature);
 

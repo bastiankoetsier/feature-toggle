@@ -1,16 +1,16 @@
 <?php namespace Bkoetsier\FeatureToggle\Features;
 
-class Id {
+class Id
+{
 
     /**
      * @var string
      */
     private $id;
 
-    function __construct($id)
+    public function __construct($id)
     {
-        if( ! is_string($id))
-        {
+        if (! is_string($id)) {
             throw new \InvalidArgumentException("Feature-ID has to be a string");
         }
         $this->id = $id;
@@ -20,6 +20,4 @@ class Id {
     {
         return $this->id;
     }
-
-
 }
