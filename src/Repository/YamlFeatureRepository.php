@@ -73,7 +73,7 @@ class YamlFeatureRepository implements FeatureRepository
         $collection = new Collection();
         foreach ($config as $feature) {
             $featureId = new Id($feature['id']);
-            $keys = $feature['keys'];
+            $keys = $feature['serviceIds'];
             $state = new State((int) $feature['state']);
             $collection->add(new Feature($featureId, $keys, $state));
         }

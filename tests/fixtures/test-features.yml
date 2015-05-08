@@ -2,12 +2,12 @@
 # example features
 features:
   - id: Enabled-Feature
-    keys:
-      - old: old.service
-        new: new.service
+    serviceIds:
+      - idOld: old.service
+        idNew: new.service
     state: true
   - id: Disabled-Feature
-    keys:
-      - old: newKey
-        new: newKey2
+    serviceIds:
+      - idOld: newKey
+        idNew: newKey2
     state: false

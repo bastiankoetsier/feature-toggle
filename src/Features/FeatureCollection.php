@@ -1,7 +1,4 @@
-<?php namespace Bkoetsier\FeatureToggle;
-
-use Bkoetsier\FeatureToggle\Features\Feature;
-use Bkoetsier\FeatureToggle\Features\Id;
+<?php namespace Bkoetsier\FeatureToggle\Features;
 
 interface FeatureCollection extends \Countable
 {

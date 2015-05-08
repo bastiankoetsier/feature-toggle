@@ -16,7 +16,7 @@ class Manager
      */
     private $container;
     /**
-     * @var \Bkoetsier\FeatureToggle\FeatureCollection
+     * @var \Bkoetsier\FeatureToggle\Features\FeatureCollection
      */
     private $features;
 
@@ -47,7 +47,7 @@ class Manager
     }
 
     /**
-     * @return \Bkoetsier\FeatureToggle\FeatureCollection
+     * @return \Bkoetsier\FeatureToggle\Features\FeatureCollection
      */
     public function getAllFeatures()
     {
@@ -92,8 +92,8 @@ class Manager
         /** @var \Bkoetsier\FeatureToggle\Features\Feature $feature */
         foreach ($this->getActiveFeatures()->all() as $feature) {
             foreach ($feature->getKeys() as $serviceKey) {
-                $oldKey = $serviceKey['old'];
-                $newKey = $serviceKey['new'];
+                $oldKey = $serviceKey['idOld'];
+                $newKey = $serviceKey['idNew'];
                 $newService = $this->container->get($newKey);
                 $this->container->set($oldKey, $newService);
                 $replaced++;

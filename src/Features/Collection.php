@@ -1,7 +1,6 @@
 <?php namespace Bkoetsier\FeatureToggle\Features;
 
 use Bkoetsier\FeatureToggle\Exceptions\FeatureIdExistsException;
-use Bkoetsier\FeatureToggle\FeatureCollection;
 
 class Collection implements FeatureCollection
 {
