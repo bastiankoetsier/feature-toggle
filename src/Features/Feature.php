@@ -34,7 +34,7 @@ class Feature
 
     public function getKeys()
     {
-        return $this->key;
+        return $this->keys;
     }
 
     /**

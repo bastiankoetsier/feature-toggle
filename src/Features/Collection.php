@@ -10,12 +10,14 @@ class Collection implements FeatureCollection
 
     /**
      * @param \Bkoetsier\FeatureToggle\Features\Feature $feature
+     * @return bool
      * @throws \Bkoetsier\FeatureToggle\Exceptions\FeatureIdExistsException
      */
     public function add(Feature $feature)
     {
         $this->guard($feature);
         $this->features[] = $feature;
+        return true;
     }
 
     /**
@@ -31,6 +33,10 @@ class Collection implements FeatureCollection
         return true;
     }
 
+    /**
+     * @param \Bkoetsier\FeatureToggle\Features\Id $id
+     * @return bool
+     */
     public function remove(Id $id)
     {
         /**
@@ -39,8 +45,10 @@ class Collection implements FeatureCollection
         foreach ($this->features as $index => $f) {
             if ($f->getId()->get() == $id->get()) {
                 unset($this->features[$index]);
+                return true;
             }
         }
+        return false;
     }
 
     public function has(Id $id)
