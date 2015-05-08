@@ -6,7 +6,6 @@ interface Adapter
      * @param $id
      * @param $serviceInstance
      * @return bool
-     * @throws \Bkoetsier\FeatureToggle\Exceptions\ServiceKeyMissingException
      */
     public function set($id, $serviceInstance);
 
@@ -28,6 +27,4 @@ interface Adapter
      * @return mixed
      */
     public function getContainer();
-
-
 }

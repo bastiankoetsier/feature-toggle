@@ -1,23 +1,18 @@
 <?php namespace Bkoetsier\FeatureToggle\Container;
 
 use Bkoetsier\FeatureToggle\Exceptions\ServiceKeyMissingException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Illuminate\Contracts\Container\Container;
 
-class SymfonyContainerAdapter implements Adapter
+class LaravelContainerAdapter implements Adapter
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \Illuminate\Contracts\Container\Container
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
-    }
-
-    public function getContainer()
-    {
-        return $this->container;
     }
 
     /**
@@ -27,7 +22,8 @@ class SymfonyContainerAdapter implements Adapter
      */
     public function set($id, $serviceInstance)
     {
-        return $this->container->set($id, $serviceInstance);
+        $this->container->instance($id, $serviceInstance);
+        return true;
     }
 
     /**
@@ -36,7 +32,7 @@ class SymfonyContainerAdapter implements Adapter
      */
     public function has($id)
     {
-        return $this->container->has($id);
+        return $this->container->bound($id);
     }
 
     /**
@@ -46,9 +42,18 @@ class SymfonyContainerAdapter implements Adapter
      */
     public function get($id)
     {
-        if (! $this->container->has($id)) {
+        if (! $this->has($id)) {
             throw new ServiceKeyMissingException("Service with id ".$id." is not set in container");
         }
-        return $this->container->get($id);
+        return $this->container->make($id);
+    }
+
+    /**
+     * returns the di-container-instance
+     * @return mixed
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 }

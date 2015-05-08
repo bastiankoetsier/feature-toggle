@@ -3,6 +3,7 @@
 // @codingStandardsIgnoreStart
 use Bkoetsier\FeatureToggle\Config\Builder;
 use Bkoetsier\FeatureToggle\Config\Validator;
+use Bkoetsier\FeatureToggle\Container\LaravelContainerAdapter;
 use Bkoetsier\FeatureToggle\Container\SymfonyContainerAdapter;
 use Bkoetsier\FeatureToggle\Features\Collection;
 use Bkoetsier\FeatureToggle\Features\Id;
@@ -10,7 +11,8 @@ use Bkoetsier\FeatureToggle\Features\State;
 use Bkoetsier\FeatureToggle\Manager;
 use Bkoetsier\FeatureToggle\Repository\YamlFeatureRepository;
 use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\Container as SymfonyContainer;
+use \Illuminate\Container\Container as LaravelContainer;
 use Symfony\Component\Yaml\Parser;
 
 class ManagerTest extends \PHPUnit_Framework_TestCase
@@ -61,22 +63,40 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
      */
      public function it_replaces_enabled_feature_keys_in_symfony_container()
      {
-         $symfonyContainer = new Container();
+         $symfonyContainer = new SymfonyContainer();
 
          $oldService = new ServiceStub('oldService');
          $symfonyContainer->set('old.service',$oldService);
          $newFancyService = new ServiceStub('newFancyService');
          $symfonyContainer->set('new.service',$newFancyService);
 
-
-
-
-
          $adapter = new SymfonyContainerAdapter($symfonyContainer);
          $this->manager->setContainer($adapter);
          $this->manager->apply();
 
-         $container = $this->manager->getAdapter()->getContainer();
+         $container = $this->manager->getAdapter();
+         $replacedService = $container->get('old.service');
+         $this->assertEquals($newFancyService,$replacedService);
+         $this->assertEquals('newFancyService',$replacedService->name);
+     }
+
+    /**
+     * @test
+     */
+     public function it_replaces_enabled_feature_keys_in_laravel_container()
+     {
+         $laravelContainer = new LaravelContainer();
+
+         $oldService = new ServiceStub('oldService');
+         $laravelContainer->instance('old.service',$oldService);
+         $newFancyService = new ServiceStub('newFancyService');
+         $laravelContainer->instance('new.service',$newFancyService);
+
+         $adapter = new LaravelContainerAdapter($laravelContainer);
+         $this->manager->setContainer($adapter);
+         $this->manager->apply();
+
+         $container = $this->manager->getAdapter();
          $replacedService = $container->get('old.service');
          $this->assertEquals($newFancyService,$replacedService);
          $this->assertEquals('newFancyService',$replacedService->name);
