@@ -1,0 +1,13 @@
+---
+# example features
+features:
+  - id: Enabled-Feature
+    keys:
+      - old: old.service
+        new: new.service
+    state: true
+  - id: Disabled-Feature
+    keys:
+      - old: newKey
+        new: newKey2
+    state: false

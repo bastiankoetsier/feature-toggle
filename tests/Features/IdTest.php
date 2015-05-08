@@ -1,5 +1,5 @@
-<?php namespace Bkoetsier\FeatureToggle\Features\Tests;
-
+<?php namespace Bkoetsier\FeatureToggle\Tests\Features;
+// @codingStandardsIgnoreStart
 use Bkoetsier\FeatureToggle\Features\Id;
 
 class IdTest extends \PHPUnit_Framework_TestCase {

@@ -1,7 +1,11 @@
 <?php namespace Bkoetsier\FeatureToggle\Repository;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Processor;
+use Bkoetsier\FeatureToggle\Config\Validator;
+
+use Bkoetsier\FeatureToggle\Features\Collection;
+use Bkoetsier\FeatureToggle\Features\Feature;
+use Bkoetsier\FeatureToggle\Features\Id;
+use Bkoetsier\FeatureToggle\Features\State;
 use Symfony\Component\Yaml\Parser;
 
 class YamlFeatureRepository implements FeatureRepository
@@ -11,38 +15,36 @@ class YamlFeatureRepository implements FeatureRepository
      */
     private $yaml;
     /**
-     * @var \Symfony\Component\Config\Definition\Processor
-     */
-    private $configProcessor;
-    /**
-     * @var \Symfony\Component\Config\Definition\ConfigurationInterface
-     */
-    private $configValidator;
-    /**
      * @var \SplFileInfo
      */
     private $file;
 
+    /**
+     * @var \Bkoetsier\FeatureToggle\Config\Validator;
+     */
+    private $validator;
 
     /**
      * @param \SplFileInfo $file
      * @param \Symfony\Component\Yaml\Parser $yaml
-     * @param \Symfony\Component\Config\Definition\Processor $configProcessor
-     * @param \Symfony\Component\Config\Definition\ConfigurationInterface $configValidator
+     * @param \Bkoetsier\FeatureToggle\Config\Validator $configValidator
      */
     public function __construct(
         \SplFileInfo $file,
         Parser $yaml,
-        Processor $configProcessor,
-        ConfigurationInterface $configValidator
+        Validator $configValidator
     ) {
         $this->guardFile($file);
         $this->file = $file;
         $this->yaml = $yaml;
-        $this->configProcessor = $configProcessor;
-        $this->configValidator = $configValidator;
+        $this->validator = $configValidator;
     }
 
+    /**
+     * @param \SplFileInfo $fileInfo
+     * @return bool
+     * @throws \InvalidArgumentException
+     */
     private function guardFile(\SplFileInfo $fileInfo)
     {
         if (! in_array($fileInfo->getExtension(), ['yml','yaml'])) {
@@ -52,12 +54,31 @@ class YamlFeatureRepository implements FeatureRepository
     }
 
     /**
-     * @return array
+     * @return \Bkoetsier\FeatureToggle\Features\Collection
      */
     public function all()
     {
         $configArray = $this->yaml->parse(file_get_contents($this->file->getRealPath()));
-        $result = $this->configProcessor->processConfiguration($this->configValidator, $configArray);
-        return $result;
+        $config =  $this->validator->validate($configArray);
+        return $this->buildCollection($config);
     }
+
+    /**
+     * @Todo extract collection building
+     * @param array $config
+     * @return \Bkoetsier\FeatureToggle\Features\Collection
+     */
+    private function buildCollection(array $config)
+    {
+        $collection = new Collection();
+        foreach ($config as $feature) {
+            $featureId = new Id($feature['id']);
+            $keys = $feature['keys'];
+            $state = new State((int) $feature['state']);
+            $collection->add(new Feature($featureId, $keys, $state));
+        }
+        return $collection;
+    }
+
+
 }

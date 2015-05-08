@@ -2,7 +2,6 @@
 
 class Id
 {
-
     /**
      * @var string
      */

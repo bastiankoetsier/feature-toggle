@@ -3,7 +3,7 @@
 use Bkoetsier\FeatureToggle\Features\Feature;
 use Bkoetsier\FeatureToggle\Features\Id;
 
-interface FeatureCollection
+interface FeatureCollection extends \Countable
 {
 
     public function add(Feature $feature);

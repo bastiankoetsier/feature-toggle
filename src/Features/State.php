@@ -2,10 +2,12 @@
 
 class State
 {
-
     const ON = 1;
     const OFF = 0;
 
+    /**
+     * @var int
+     */
     private $state;
 
     public function __construct($state)

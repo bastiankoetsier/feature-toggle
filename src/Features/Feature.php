@@ -1,6 +1,5 @@
 <?php namespace Bkoetsier\FeatureToggle\Features;
 
-
 class Feature
 {
 
@@ -42,6 +41,14 @@ class Feature
      */
     public function isEnabled()
     {
-        return $this->state === State::ON;
+        return $this->state->get() === State::ON;
+    }
+
+    /**
+     * @return \Bkoetsier\FeatureToggle\Features\State
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }

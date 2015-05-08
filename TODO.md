@@ -1,6 +1,7 @@
 # Issues
-- Yaml-Repo has way too many dependencies (extract validation)
-- 
+- Yaml-Repo has way too many dependencies
+- Wrap keys in collection + value-obj
+- extract collection-building in yaml-repo
 
 # Todos
 - hydrate (validated) array to objects

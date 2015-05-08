@@ -3,7 +3,7 @@
 interface FeatureRepository
 {
     /**
-     * @return array
+     * @return \Bkoetsier\FeatureToggle\Features\Collection
      */
     public function all();
 }

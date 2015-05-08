@@ -51,6 +51,10 @@ class Collection implements FeatureCollection
         return false;
     }
 
+    /**
+     * @param \Bkoetsier\FeatureToggle\Features\Id $id
+     * @return bool
+     */
     public function has(Id $id)
     {
         foreach ($this->features as $f) {
@@ -62,8 +66,21 @@ class Collection implements FeatureCollection
         return false;
     }
 
+    /**
+     * @return array
+     */
     public function all()
     {
         return $this->features;
+    }
+
+    /**
+     * Count elements of an object
+     * @return int The custom count as an integer.
+     * The return value is cast to an integer.
+     */
+    public function count()
+    {
+        return (int) count($this->features);
     }
 }

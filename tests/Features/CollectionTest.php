@@ -1,5 +1,5 @@
-<?php namespace Bkoetsier\FeatureToggle\Features\Tests;
-
+<?php namespace Bkoetsier\FeatureToggle\Tests\Features;
+// @codingStandardsIgnoreStart
 use Bkoetsier\FeatureToggle\Exceptions\FeatureIdExistsException;
 use Bkoetsier\FeatureToggle\Features\Collection;
 use Bkoetsier\FeatureToggle\Features\Feature;
