@@ -1,6 +1,5 @@
 <?php namespace Bkoetsier\FeatureToggle\Features;
 
-use Bkoetsier\FeatureToggle\FeatureCollection;
 
 class Feature
 {
@@ -18,7 +17,7 @@ class Feature
      */
     private $state;
 
-    public function __construct(Id $id, FeatureCollection $keys, State $state)
+    public function __construct(Id $id, array $keys, State $state)
     {
         $this->id = $id;
         $this->keys = $keys;
@@ -35,7 +34,7 @@ class Feature
 
     public function getKeys()
     {
-        return $this->keys->all();
+        return $this->key;
     }
 
     /**

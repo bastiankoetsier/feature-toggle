@@ -1,4 +1,4 @@
-<?php namespace Bkoetsier\FeatureToggle\Tests;
+<?php namespace Bkoetsier\FeatureToggle\Features\Tests;
 
 use Bkoetsier\FeatureToggle\Features\Id;
 

@@ -25,11 +25,8 @@ class Collection implements FeatureCollection
      */
     protected function guard(Feature $feature)
     {
-        /** @var Feature $f */
-        foreach ($this->features as $f) {
-            if ($f->getId() == $feature->getId()) {
-                throw new FeatureIdExistsException("Feature-ID already exists in collection");
-            }
+        if ($this->has($feature->getId())) {
+            throw new FeatureIdExistsException("Feature-ID already exists in collection");
         }
         return true;
     }
@@ -40,10 +37,21 @@ class Collection implements FeatureCollection
          * @var Feature $f
          */
         foreach ($this->features as $index => $f) {
-            if ($f->getId() == $id->get()) {
+            if ($f->getId()->get() == $id->get()) {
                 unset($this->features[$index]);
             }
         }
+    }
+
+    public function has(Id $id)
+    {
+        foreach ($this->features as $f) {
+            /** @var Feature $f */
+            if ($f->getId()->get() == $id->get()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function all()

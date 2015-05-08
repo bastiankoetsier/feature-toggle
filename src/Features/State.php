@@ -10,7 +10,7 @@ class State
 
     public function __construct($state)
     {
-        if (! in_array($state, [self::ON, self::OFF])) {
+        if ($state !== self::ON && $state !== self::OFF) {
             throw new \InvalidArgumentException("Feature-State has to be 1 or 0");
         }
         $this->state = $state;

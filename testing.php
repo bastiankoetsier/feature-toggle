@@ -1,9 +1,19 @@
 <?php
+use Bkoetsier\FeatureToggle\Features\State;
 use Bkoetsier\FeatureToggle\Repository\YamlFeatureRepository;
 
 require_once('vendor/autoload.php');
 
 
+$featureId = new \Bkoetsier\FeatureToggle\Features\Id('Feature-1');
+$feature1 = new \Bkoetsier\FeatureToggle\Features\Feature($featureId,[],new State(State::ON));
+$feature2 = new \Bkoetsier\FeatureToggle\Features\Feature($featureId,[],new State(State::ON));
+
+$collection = new \Bkoetsier\FeatureToggle\Features\Collection();
+$collection->add($feature1);
+dump($collection->all());
+$collection->add($feature2);
+dump($collection->all());
 
 
 
